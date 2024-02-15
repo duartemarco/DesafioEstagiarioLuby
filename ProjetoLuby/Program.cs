@@ -1,24 +1,35 @@
-﻿internal class Program
+﻿using System.Globalization;
+
+internal class Program
 {
     private static void Main(string[] args)
     {
         //1.1
         CalcularFatorial(5);//120
-            //Console.WriteLine(CalcularFatorial(5);
+        //Console.WriteLine(CalcularFatorial(5));
 
         //1.2
         CalcularPremio(100, "vip", null);//120
         CalcularPremio(100, "basic", 3);//300
-            //Console.WriteLine(CalcularPremio(100, "vip", null));
-            //Console.WriteLine(CalcularPremio(100, "basic", 3));
+        //Console.WriteLine(CalcularPremio(100, "vip", null));
+        //Console.WriteLine(CalcularPremio(100, "basic", 3));
 
         //1.3
-        ContarNumerosPrimos(10);//4
-            //Console.WriteLine(ContarNumerosPrimos(10));
+        //ContarNumerosPrimos(10);//4
+        //Console.WriteLine(ContarNumerosPrimos(10));
 
         //1.4
         CalcularVogais("Luby Software");//4
-            //Console.WriteLine(CalcularVogais("Luby Software"));
+        //Console.WriteLine(CalcularVogais("Luby Software"));
+
+        //1.5
+        //CalcularValorComDescontoFormatado("R$ 6.800,00", "30%")//"R$ 4.760,00"
+        Console.WriteLine(CalcularValorComDescontoFormatado("R$ 6.800,00", "30%"));
+
+        //1.6
+        Console.WriteLine(CalcularDiferencaData("10122020", "25122020"));
+
+
     }
 
     //1.1 Implemente a função abaixo para calcular fatorial de um número.
@@ -67,6 +78,7 @@
         }
     }
 
+    /*
     //1.3 Implemente a função abaixo para contar quantos números primos existe até o número informado.
     private static int ContarNumerosPrimos(int valor)
     {
@@ -87,7 +99,8 @@
             return false;
         }
     }
-    
+    */
+
     //1.4 Implemente a função abaixo que conta e calcula a quantidade de vogais dentro de uma string.
     private static int CalcularVogais(string palavra)
     {
@@ -103,4 +116,24 @@
         return contagem;
     }
 
+    //1.5 Implemente a função abaixo que aplica uma porcentagem de desconto a um valor e retorna o resultado.
+    private static string CalcularValorComDescontoFormatado(string valor, string desconto)
+    {
+        decimal value = decimal.Parse(valor.Replace("R$", "").Replace(".", "").Replace(",", "."));
+        decimal discount = decimal.Parse(desconto.Replace("%", "")) / 100;
+        decimal resultado = value * (1 - discount);
+        return string.Format("R$ {0:#,0.00}", resultado);
+    }
+
+    //1.6 Implemente a função abaixo que obtém duas string de datas e calcula a diferença de dias entre elas.
+    private static int CalcularDiferencaData(string data1, string data2)
+    {
+        
+        CultureInfo ptBR = new CultureInfo("pt-BR");
+        DateTime dataConvertida1 = DateTime.ParseExact(data1, "ddMMyyyy", ptBR, DateTimeStyles.None);
+        DateTime dataConvertida2 = DateTime.ParseExact(data2, "ddMMyyyy", ptBR, DateTimeStyles.None);
+        TimeSpan diferenca = dataConvertida2 - dataConvertida1;
+        return diferenca.Days;
+
+    }
 }
