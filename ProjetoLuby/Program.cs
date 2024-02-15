@@ -29,6 +29,8 @@ internal class Program
         //1.6
         Console.WriteLine(CalcularDiferencaData("10122020", "25122020"));
 
+        //1.7
+
 
     }
 
@@ -128,12 +130,50 @@ internal class Program
     //1.6 Implemente a função abaixo que obtém duas string de datas e calcula a diferença de dias entre elas.
     private static int CalcularDiferencaData(string data1, string data2)
     {
-        
         CultureInfo ptBR = new CultureInfo("pt-BR");
         DateTime dataConvertida1 = DateTime.ParseExact(data1, "ddMMyyyy", ptBR, DateTimeStyles.None);
         DateTime dataConvertida2 = DateTime.ParseExact(data2, "ddMMyyyy", ptBR, DateTimeStyles.None);
         TimeSpan diferenca = dataConvertida2 - dataConvertida1;
         return diferenca.Days;
-
     }
+
+    //1.7 Implemente a função abaixo que retorna um novo vetor com todos elementos pares do vetor informado.
+    private static int[] ObterElementosPares(Array vetor)
+    {
+        try
+        {
+
+        int tamanho = 0;
+        for (int i = 0; i < vetor.Length; i++)
+        {
+            if ((int)vetor.GetValue(i) % 2 == 0)
+            {
+               //Console.WriteLine(i); 
+               tamanho++;
+            }
+        }
+
+        int[] vetorNovo = new int [tamanho];
+        int index = 0;
+
+        for (int i = 0; i < vetor.Length; i++)
+        {
+            if ((int)vetor.GetValue(i) % 2 == 0)
+            {
+                Console.WriteLine(i); 
+                vetorNovo[index] = (int)vetor.GetValue(i);
+                index++;
+            }
+        }
+        return vetorNovo;
+
+        } catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return null;
+        }
+    }
+
+
+    
 }
