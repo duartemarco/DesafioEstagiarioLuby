@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Scripts SQL\" />
+    <Folder Include="Logica Programacao\" />
   </ItemGroup>
 
 </Project>
