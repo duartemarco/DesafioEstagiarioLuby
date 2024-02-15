@@ -5,12 +5,20 @@
         //1.1
         CalcularFatorial(5);//120
             //Console.WriteLine(CalcularFatorial(5);
+
         //1.2
-        CalcularPremio(100, "vip", null);
-        CalcularPremio(100, "basic", 3);
-        //Console.WriteLine(CalcularPremio(100, "vip", null));
-        //Console.WriteLine(CalcularPremio(100, "basic", 3));
-        Console.WriteLine(ContarNumerosPrimos(10));
+        CalcularPremio(100, "vip", null);//120
+        CalcularPremio(100, "basic", 3);//300
+            //Console.WriteLine(CalcularPremio(100, "vip", null));
+            //Console.WriteLine(CalcularPremio(100, "basic", 3));
+
+        //1.3
+        ContarNumerosPrimos(10);//4
+            //Console.WriteLine(ContarNumerosPrimos(10));
+
+        //1.4
+        CalcularVogais("Luby Software");//4
+            //Console.WriteLine(CalcularVogais("Luby Software"));
     }
 
     //1.1 Implemente a função abaixo para calcular fatorial de um número.
@@ -79,7 +87,20 @@
             return false;
         }
     }
-
-    //1.4
+    
+    //1.4 Implemente a função abaixo que conta e calcula a quantidade de vogais dentro de uma string.
+    private static int CalcularVogais(string palavra)
+    {
+        int contagem = 0;
+        palavra = palavra.ToLower();
+        for (int i = 0; i < palavra.Length; i++)
+        {
+            if (palavra[i] == 'a' || palavra[i] == 'e' || palavra[i] == 'i' || palavra[i] == 'o' || palavra[i] == 'u')
+            {
+                contagem++;
+            }
+        }
+        return contagem;
+    }
 
 }
