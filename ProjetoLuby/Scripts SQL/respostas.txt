@@ -1,0 +1,63 @@
+2.1 Crie uma query para selecionar todas as pessoas 'tabela_pessoa' e os respectivos eventos 'tabela_evento' o qual elas participam.
+
+select tp.nome, te.evento from tabela_pessoa tp
+left join tabela_evento te on tp.id = te.pessoa_id
+order by tp.nome, te.evento;
+
+2.2 Crie uma query para selecionar todas as pessoas 'tabela_pessoa' com sobrenome 'Doe'.
+
+select * from tabela_pessoa tp
+where tp.nome like "% Doe";
+
+2.3 Crie uma query para adicionar um novo evento 'tabela_evento' e relacionar à pessoa 'Lisa Romero'.
+Estou desconsiderando o fato de que, em uma tabela de verdade, o ID seria AUTO_INCREMENT e PRIMARY KEY
+
+insert into tabela_evento (id, evento, pessoa_id) VALUES (5, "Evento E", 5);
+
+2.4 Crie uma query para atualizar 'Evento D' na 'tabela_evento' e relacionar à pessoa 'Joh Doe'
+No meu dia-a-dia, eu sempre faço backups de tabelas antes de rodar um UPDATE, além de checar infinitas vezes se a sintaxe está correta.
+
+update tabela_evento te
+set te.pessoa_id = 1
+where te.id = 4
+and te.evento = "Evento D";
+
+2.5 Crie uma query para remover o 'Evento B' na 'tabela_evento'.
+
+delete from tabela_evento te
+where te.id = 2
+and te.evento = "Evento B";
+
+2.6 Crie uma query para remover todas as pessoas 'tabela_pessoa' 
+que não possuem eventos 'tabela_evento' relacionados.
+
+delete from tabela_pessoa tp
+where tp.id not in (select 1 
+	from tabela_evento te
+	where te.pessoa_id = tp.id);
+
+2.7 Crie uma query para alterar a tabela 'tabela_pessoa' e 
+adicionar a coluna 'idade' (int)
+
+alter table tabela_pessoa
+add idade int;
+
+2.8 Crie uma query para criar uma tabela chamada 'tabela_telefone' que pertence a uma pessoa com seguintes campos:
+
+create table tabela_telefone (
+id int,
+telefone varchar(200),
+pessoa_id int,
+primary key (id),
+foreign key (pessoa_id) references tabela_pessoa(id)
+);
+
+2.9 Crie uma query para criar uma índice do tipo **único** na coluna telefone da 'tabela_telefone'.
+
+create unique index idx_telefoneId
+on tabela_telefone (id);
+
+
+2.10 Crie uma query para remover a 'tabela_telefone'.
+
+drop table tabela_telefone;
