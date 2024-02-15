@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts SQL\2-1.md" />
+    <None Remove="Scripts SQL\2-2.md" />
+    <None Remove="Scripts SQL\2-3.md" />
+    <None Remove="Scripts SQL\2-4.md" />
+    <None Remove="Scripts SQL\2-5.md" />
+    <None Remove="Scripts SQL\2-6.md" />
+    <None Remove="Scripts SQL\2-7.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Scripts SQL\2-7.md" />
+    <Compile Include="Scripts SQL\2-6.md" />
+    <Compile Include="Scripts SQL\2-5.md" />
+    <Compile Include="Scripts SQL\2-4.md" />
+    <Compile Include="Scripts SQL\2-3.md" />
+    <Compile Include="Scripts SQL\2-2.md" />
+    <Compile Include="Scripts SQL\2-1.md" />
+  </ItemGroup>
+
+</Project>
