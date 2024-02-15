@@ -8,8 +8,9 @@
         //1.2
         CalcularPremio(100, "vip", null);
         CalcularPremio(100, "basic", 3);
-            //Console.WriteLine(CalcularPremio(100, "vip", null));
-            //Console.WriteLine(CalcularPremio(100, "basic", 3));
+        //Console.WriteLine(CalcularPremio(100, "vip", null));
+        //Console.WriteLine(CalcularPremio(100, "basic", 3));
+        Console.WriteLine(ContarNumerosPrimos(10));
     }
 
     //1.1 Implemente a função abaixo para calcular fatorial de um número.
@@ -59,5 +60,26 @@
     }
 
     //1.3 Implemente a função abaixo para contar quantos números primos existe até o número informado.
+    private static int ContarNumerosPrimos(int valor)
+    {
+        int contagem = 0;
+        for (int i = 2; i < valor; i++)
+        {
+            if(VerificaPrimo(valor) == true)
+            {
+                contagem++;
+            }
+
+        }
+    }
+    private static bool VerificaPrimo(int valor)
+    {
+        if (valor <= 1)
+        {
+            return false;
+        }
+    }
+
+    //1.4
 
 }
