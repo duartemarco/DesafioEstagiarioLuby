@@ -1,4 +1,6 @@
-ï»¿using System.Globalization;
+// Nessa pasta para o programa não ficar com dois entry points e poder ser compilado.
+
+using System.Globalization;
 
 internal class Program
 {
@@ -42,7 +44,7 @@ internal class Program
 
     }
 
-    //1.1 Implemente a funÃ§Ã£o abaixo para calcular fatorial de um nÃºmero.
+    //1.1 Implemente a função abaixo para calcular fatorial de um número.
     private static int CalcularFatorial(int a)
     {
         int resposta = 1;
@@ -53,7 +55,7 @@ internal class Program
         return resposta;
     }
 
-    //1.2 Implemente a funÃ§Ã£o abaixo que calcula o valor total do prÃªmio somando fator do tipo do prÃªmio conforme valores:
+    //1.2 Implemente a função abaixo que calcula o valor total do prêmio somando fator do tipo do prêmio conforme valores:
     private static int? CalcularPremio(double premio, string plano, double? fator)
     {
         if (premio > 0 && fator.HasValue)
@@ -89,7 +91,7 @@ internal class Program
     }
 
     
-    //1.3 Implemente a funÃ§Ã£o abaixo para contar quantos nÃºmeros primos existe atÃ© o nÃºmero informado.
+    //1.3 Implemente a função abaixo para contar quantos números primos existe até o número informado.
     private static int ContarNumerosPrimos(int valor)
     {
         int contador = 0;
@@ -115,7 +117,7 @@ internal class Program
         return true;
     }
     
-    //1.4 Implemente a funÃ§Ã£o abaixo que conta e calcula a quantidade de vogais dentro de uma string.
+    //1.4 Implemente a função abaixo que conta e calcula a quantidade de vogais dentro de uma string.
     private static int CalcularVogais(string palavra)
     {
         int contagem = 0;
@@ -130,7 +132,7 @@ internal class Program
         return contagem;
     }
 
-    //1.5 Implemente a funÃ§Ã£o abaixo que aplica uma porcentagem de desconto a um valor e retorna o resultado.
+    //1.5 Implemente a função abaixo que aplica uma porcentagem de desconto a um valor e retorna o resultado.
     private static string CalcularValorComDescontoFormatado(string valor, string desconto)
     {
         decimal value = decimal.Parse(valor.Replace("R$", "").Replace(".", "").Replace(",", "."));
@@ -139,7 +141,7 @@ internal class Program
         return string.Format("R$ {0:#,0.00}", resultado);
     }
 
-    //1.6 Implemente a funÃ§Ã£o abaixo que obtÃ©m duas string de datas e calcula a diferenÃ§a de dias entre elas.
+    //1.6 Implemente a função abaixo que obtém duas string de datas e calcula a diferença de dias entre elas.
     private static int CalcularDiferencaData(string data1, string data2)
     {
         CultureInfo ptBR = new CultureInfo("pt-BR");
@@ -149,7 +151,7 @@ internal class Program
         return diferenca.Days;
     }
 
-    //1.7 Implemente a funÃ§Ã£o abaixo que retorna um novo vetor com todos elementos pares do vetor informado.
+    //1.7 Implemente a função abaixo que retorna um novo vetor com todos elementos pares do vetor informado.
     private static int[] ObterElementosPares(Array vetor)
     {
         try
@@ -186,7 +188,7 @@ internal class Program
         }
     }
 
-    //1.8 Implemente a funÃ§Ã£o abaixo que deve buscar um ou mais elementos no vetor que contÃ©m o valor ou parte do valor informado na busca.
+    //1.8 Implemente a função abaixo que deve buscar um ou mais elementos no vetor que contém o valor ou parte do valor informado na busca.
     static string[] BuscarPessoa(string[] vetor, string busca)
     {
         return Array.FindAll(vetor, pessoa => pessoa.Contains(busca));
@@ -204,14 +206,14 @@ internal class Program
         return true;
     }
 
-    //1.9 Implemente a funÃ§Ã£o abaixo que obtÃ©m uma string com nÃºmeros separados por vÃ­rgula e transforma em um
-    //array de array de inteiros com no mÃ¡ximo dois elementos.
+    //1.9 Implemente a função abaixo que obtém uma string com números separados por vírgula e transforma em um
+    //array de array de inteiros com no máximo dois elementos.
     private static string TransformarEmMatriz(string valores)
     {
         return "";
     }
 
-    //1.10 Implemente a funÃ§Ã£o abaixo que compara dois vetores e cria um novo vetor com os elementos faltantes de ambos.
+    //1.10 Implemente a função abaixo que compara dois vetores e cria um novo vetor com os elementos faltantes de ambos.
     private static int ObterElementosFaltantes(Array vetor1, Array vetor2)
     {
         return 0;

@@ -20,8 +20,4 @@
     <None Remove="Scripts SQL\2-9.md" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Logica Programacao\" />
-  </ItemGroup>
-
 </Project>
