@@ -1,219 +1,91 @@
-﻿using System.Globalization;
+﻿using ProjetoLuby;
+using System.Globalization;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        //1.1
-        CalcularFatorial(5);//120
+        Console.WriteLine("Bem vindo à Máquina de Bebidas da Lupy!");
+        //Console.WriteLine("Inicializando sistema:");
+        VendingMachine vendingMachine = new VendingMachine();
+        int entrada;
 
-        //1.2
-        CalcularPremio(100, "vip", null);//120
-        CalcularPremio(100, "basic", 3);//300
+        // Adicionando bebidas ao estoque
+        vendingMachine.AdicionarBebida(new Bebida("Pepsi", 3.00, 20));
+        vendingMachine.AdicionarBebida(new Bebida("Fanta", 3.20, 18));
+        vendingMachine.AdicionarBebida(new Bebida("Coca Cola", 4.0, 20));
+        vendingMachine.AdicionarBebida(new Bebida("Lipton", 2.80, 15));
 
-        //1.3
-        ContarNumerosPrimos(10);//4
-
-        //1.4
-        CalcularVogais("Luby Software");//4
-
-        //1.5
-        CalcularValorComDescontoFormatado("R$ 6.800,00", "30%");//"R$ 4.760,00"
-
-        //1.6
-        CalcularDiferencaData("10122020", "25122020");//15
-
-        //1.7
-        int[] vetor = new int[] { 1, 2, 3, 4, 5 };
-        ObterElementosPares(vetor); //{2,4}
-
-        //1.8
-        string[] vetor2 = new string[] {
-            "John Doe",
-            "Jane Doe",
-            "Alice Jones",
-            "Bobby Louis",
-            "Lisa Romero"
-        };
-        BuscarPessoa(vetor2, "Doe");//true
-        BuscarPessoa(vetor2, "Alice");//true
-        BuscarPessoa(vetor2, "James");//true
-
-
-    }
-
-    //1.1 Implemente a função abaixo para calcular fatorial de um número.
-    private static int CalcularFatorial(int a)
-    {
-        int resposta = 1;
-        for (int i = a; i >= 1; i--)
+        do
         {
-            resposta *= i;
-        }
-        return resposta;
-    }
+            ExibeMenu();
+            entrada = int.Parse(Console.ReadLine());
 
-    //1.2 Implemente a função abaixo que calcula o valor total do prêmio somando fator do tipo do prêmio conforme valores:
-    private static int? CalcularPremio(double premio, string plano, double? fator)
-    {
-        if (premio > 0 && fator.HasValue)
-        {
-            // Fator sobrescreve o plano
-            return (int)(premio * fator.Value);
-        }
-        else
-        {
-            switch (plano)
+            switch (entrada)
             {
-                case "basic":
-                    fator = 1.0;
+                case 1:
+                    vendingMachine.MostrarBebidas();
+                    Console.WriteLine("Escolha sua bebida: (1- Pepsi, 2- Fanta, 3- Coca Cola, 4- Lipton): ");
+                    int idBebida = int.Parse(Console.ReadLine());
+                    string nomeBebida = null;
+                    switch (idBebida)
+                    {
+                        case 1:
+                            nomeBebida = "Pepsi";
+                            break;
+                        case 2:
+                            nomeBebida = "Fanta";
+                            break;
+                        case 3:
+                            nomeBebida = "Coca Cola";
+                            break;
+                        case 4:
+                            nomeBebida = "Lipton";
+                            break;
+                        default:
+                            Console.WriteLine("ID de bebida inválido.");
+                            break;
+                    }
+                    if (nomeBebida != null)
+                    {
+                        Console.WriteLine("Informe a quantidade: ");
+                        int unidades = int.Parse(Console.ReadLine());
+                        int quantidadeDisponivel = vendingMachine.GetQuantidadeBebida(nomeBebida);
+                        if (unidades <= quantidadeDisponivel)
+                        {
+                            Console.WriteLine("Informe o valor pago: ");
+                            double valorPago = double.Parse(Console.ReadLine());
+                            vendingMachine.ComprarBebida(nomeBebida, valorPago, unidades);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Quantidade insuficiente em estoque.");
+                        }
+                    }
                     break;
-                case "vip":
-                    fator = 1.2;
+                case 2:
+                    vendingMachine.MostrarBebidas();
                     break;
-                case "premium":
-                    fator = 1.5;
+                case 3:
+                    vendingMachine.MostrarVendas();
                     break;
-                case "deluxe":
-                    fator = 1.8;
-                    break;
-                case "special":
-                    fator = 2.0;
-                    break;
+                case 4:
+                    Console.WriteLine("Encerrando programa...");
+                    return;
                 default:
-                    fator = 1.0;
+                    Console.WriteLine("Opção inválida.");
                     break;
             }
-            return (int)(premio * fator);
-        }
+
+        } while (entrada != 4);
     }
 
-    
-    //1.3 Implemente a função abaixo para contar quantos números primos existe até o número informado.
-    private static int ContarNumerosPrimos(int valor)
+    public static void ExibeMenu()
     {
-        int contador = 0;
-        for (int i = 2; i <= valor; i++)
-        {
-            if (VerificaPrimo(i)) contador++;
-        }
-        return contador;
-    }
-
-    private static bool VerificaPrimo(int valor)
-    {
-        if (valor <= 1) return false;
-        if (valor <= 3) return true;
-
-        if (valor % 2 == 0 || valor % 3 == 0) return false;
-
-        for (int i = 5; i * i <= valor; i += 6)
-        {
-            if (valor % i == 0 || valor % (i + 2) == 0) return false;
-        }
-
-        return true;
-    }
-    
-    //1.4 Implemente a função abaixo que conta e calcula a quantidade de vogais dentro de uma string.
-    private static int CalcularVogais(string palavra)
-    {
-        int contagem = 0;
-        palavra = palavra.ToLower();
-        for (int i = 0; i < palavra.Length; i++)
-        {
-            if (palavra[i] == 'a' || palavra[i] == 'e' || palavra[i] == 'i' || palavra[i] == 'o' || palavra[i] == 'u')
-            {
-                contagem++;
-            }
-        }
-        return contagem;
-    }
-
-    //1.5 Implemente a função abaixo que aplica uma porcentagem de desconto a um valor e retorna o resultado.
-    private static string CalcularValorComDescontoFormatado(string valor, string desconto)
-    {
-        decimal value = decimal.Parse(valor.Replace("R$", "").Replace(".", "").Replace(",", "."));
-        decimal discount = decimal.Parse(desconto.Replace("%", "")) / 100;
-        decimal resultado = value * (1 - discount);
-        return string.Format("R$ {0:#,0.00}", resultado);
-    }
-
-    //1.6 Implemente a função abaixo que obtém duas string de datas e calcula a diferença de dias entre elas.
-    private static int CalcularDiferencaData(string data1, string data2)
-    {
-        CultureInfo ptBR = new CultureInfo("pt-BR");
-        DateTime dataConvertida1 = DateTime.ParseExact(data1, "ddMMyyyy", ptBR, DateTimeStyles.None);
-        DateTime dataConvertida2 = DateTime.ParseExact(data2, "ddMMyyyy", ptBR, DateTimeStyles.None);
-        TimeSpan diferenca = dataConvertida2 - dataConvertida1;
-        return diferenca.Days;
-    }
-
-    //1.7 Implemente a função abaixo que retorna um novo vetor com todos elementos pares do vetor informado.
-    private static int[] ObterElementosPares(Array vetor)
-    {
-        try
-        {
-
-        int tamanho = 0;
-        for (int i = 0; i < vetor.Length; i++)
-        {
-            if ((int)vetor.GetValue(i) % 2 == 0)
-            {
-               //Console.WriteLine(i); 
-               tamanho++;
-            }
-        }
-
-        int[] vetorNovo = new int [tamanho];
-        int index = 0;
-
-        for (int i = 0; i < vetor.Length; i++)
-        {
-            if ((int)vetor.GetValue(i) % 2 == 0)
-            {
-                //Console.WriteLine(i); 
-                vetorNovo[index] = (int)vetor.GetValue(i);
-                index++;
-            }
-        }
-        return vetorNovo;
-
-        } catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            return null;
-        }
-    }
-
-    //1.8 Implemente a função abaixo que deve buscar um ou mais elementos no vetor que contém o valor ou parte do valor informado na busca.
-    static string[] BuscarPessoa(string[] vetor, string busca)
-    {
-        return Array.FindAll(vetor, pessoa => pessoa.Contains(busca));
-    }
-
-    static bool ArraysSaoIguais(string[] array1, string[] array2)
-    {
-        if (array1.Length != array2.Length) return false;
-
-        for (int i = 0; i < array1.Length; i++)
-        {
-            if (array1[i] != array2[i]) return false;
-        }
-
-        return true;
-    }
-
-    //1.9 Implemente a função abaixo que obtém uma string com números separados por vírgula e transforma em um
-    //array de array de inteiros com no máximo dois elementos.
-    private static string TransformarEmMatriz(string valores)
-    {
-        return "";
-    }
-
-    //1.10 Implemente a função abaixo que compara dois vetores e cria um novo vetor com os elementos faltantes de ambos.
-    private static int ObterElementosFaltantes(Array vetor1, Array vetor2)
-    {
-        return 0;
+        Console.WriteLine("\nEscolha uma opção:");
+        Console.WriteLine("1 - Comprar Bebida");
+        Console.WriteLine("2 - Visualizar Estoque");
+        Console.WriteLine("3 - Mostrar Total de Vendas");
+        Console.WriteLine("4 - Sair");
     }
 }
